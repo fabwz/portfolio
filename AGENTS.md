@@ -1,4 +1,6 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# AGENTS.md — Fabián Zamora Portfolio
+
+> **How this file works:** `create-next-app` auto-generates a managed block at the top of this file (between `<!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
 
@@ -6,11 +8,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
-<!-- END:nextjs-agent-rules -->
-
-# AGENTS.md — Fabián Zamora Portfolio
-
-> **How this file works:** `create-next-app` auto-generates a managed block at the top of this file (between `<!-- BEGIN:nextjs-agent-rules -->` and `<!-- END:nextjs-agent-rules -->`) pointing agents to Next.js's version-matched bundled docs. Never edit inside that block — Next.js updates it automatically on future upgrades. Everything below it is project-specific and belongs to this project, not to Next.js.
+<!-- END:nextjs-agent-rules -->`) pointing agents to Next.js's version-matched bundled docs. Never edit inside that block — Next.js updates it automatically on future upgrades. Everything below it is project-specific and belongs to this project, not to Next.js.
 >
 > The root `CLAUDE.md` that `create-next-app` also generates is a one-line pointer (`@AGENTS.md`) — leave it as-is. **This file is where all real project instructions live.** There is no separate `.claude/CLAUDE.md` for this project.
 
@@ -192,6 +190,12 @@ Claude Code may install a new npm dependency only when it's clearly justified fo
 ## 12. The golden rule: never assume
 
 If information needed to complete a task is missing or unclear — content not in `CONTENT.md`, a design value not in `DESIGN.md`, a structural or architectural decision not covered in this file — **stop and ask Fabián**. Do not infer, do not fill the gap with a "reasonable" guess, and do not proceed on an assumption. This applies to every part of the project: visual values, copy, architecture, scope, and process.
+
+---
+
+## 13. Process cleanup
+
+When starting dev servers, test browsers, or any other process for verification purposes, only terminate the specific process(es) you started (by PID), never broad/blanket commands that could affect unrelated running instances (e.g. `taskkill /F /IM chrome.exe`, `pkill node`, `pkill -f chrome`). A command like `taskkill /IM chrome.exe` closes **every** Chrome process on the machine, including windows and tabs unrelated to this project — this has already happened once and caused real, unintended loss. If you can't cleanly target just your own process by PID, stop and ask rather than risk closing the user's unrelated work.
 
 ---
 
