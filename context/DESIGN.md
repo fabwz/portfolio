@@ -107,7 +107,7 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 - Shape: `rounded-full` (pill), floating, horizontally centered with top margin.
 - Exaggerated glass effect (see section 4).
 - Scroll behavior: on scrolling down, `--glass-fill` increases its opacity (from ~8% to ~20%) to improve readability over content passing behind it. Position: `fixed`/`sticky`, without changing size.
-- Content: name as text (Geist medium) on the left, navigation links in the center/right, gear icon (⚙) on the far right that opens the settings panel (ES/EN language + light/dark theme).
+- Content: no name/logo/wordmark — navigation links centered within the pill, gear icon (⚙) on the far right that opens the settings panel (ES/EN language + light/dark theme). Personal identity is carried by the Hero title ("Soy Fabián Zamora"), not the navbar.
 - Mobile: collapses into a menu icon (hamburger) within the same glass pill; opens a drawer/panel with the links.
 
 ### Buttons
