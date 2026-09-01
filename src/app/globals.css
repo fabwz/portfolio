@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
+/* Tailwind v4 has no tailwind.config.ts — next-themes applies "dark"/"light"
+   as a class on <html> (attribute="class"), so `dark:` utilities must match
+   that class rather than the OS `prefers-color-scheme`. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark mode (default) — DESIGN.md section 2 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-base: #0a0a0f;
+  --bg-surface: #12121a;
+  --blob-primary: #7c3aed;
+  --blob-secondary: #4c1d95;
+  --accent: #8b5cf6;
+  --text-primary: #f5f5f7;
+  --text-secondary: rgb(245 245 247 / 72%);
+  --border-glass: rgb(255 255 255 / 14%);
+  --glass-fill: rgb(255 255 255 / 8%);
+}
+
+/* Light mode — DESIGN.md section 2 */
+.light {
+  --bg-base: #fafafa;
+  --bg-surface: #f2f0f7;
+  --blob-primary: #c4b5fd;
+  --blob-secondary: #ddd6fe;
+  --accent: #8b5cf6;
+  --text-primary: #18181b;
+  --text-secondary: rgb(24 24 27 / 72%);
+  --border-glass: rgb(0 0 0 / 10%);
+  --glass-fill: rgb(0 0 0 / 5%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-blob-primary: var(--blob-primary);
+  --color-blob-secondary: var(--blob-secondary);
+  --color-accent: var(--accent);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-glass: var(--border-glass);
+  --color-glass-fill: var(--glass-fill);
+
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+/* Focus state (keyboard accessibility) — DESIGN.md section 4.1 / 5.
+   Apply to any interactive element (buttons, links, gear icon, hamburger). */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--bg-base),
+    0 0 0 4px var(--accent);
 }
