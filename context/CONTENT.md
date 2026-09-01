@@ -114,4 +114,15 @@ These are `aria-label` values for icon-only interactive elements (gear icon, ham
 
 ---
 
+## 8. Settings panel — toggle switch labels
+
+| Key | ES | EN |
+|---|---|---|
+| `settings.theme_dark` | Oscuro | Dark |
+| `settings.theme_light` | Claro | Light |
+
+Visible state-label text for the theme Toggle Switch (`DESIGN.md` section 5, "Toggle switch"). The language toggle uses the current language code ("ES"/"EN") as its label — not a translated string.
+
+---
+
 *Source of truth for all site copy. Any new text added to the project must be added here first, in both languages, before being implemented in code.*
