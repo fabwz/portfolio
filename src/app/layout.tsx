@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Navbar } from "@/components/layout/Navbar";
+import { BackgroundBlobs } from "@/components/ui/BackgroundBlobs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +32,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <BackgroundBlobs />
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

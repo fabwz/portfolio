@@ -64,6 +64,10 @@ export const dictionary = {
   "a11y.language_toggle": { es: "Cambiar idioma", en: "Toggle language" },
   "a11y.menu_open": { es: "Abrir menú", en: "Open menu" },
   "a11y.menu_close": { es: "Cerrar menú", en: "Close menu" },
+
+  // Settings panel toggle labels — CONTENT.md section 8
+  "settings.theme_dark": { es: "Oscuro", en: "Dark" },
+  "settings.theme_light": { es: "Claro", en: "Light" },
 } as const satisfies Record<string, DictionaryEntry>;
 
 export type DictionaryKey = keyof typeof dictionary;
