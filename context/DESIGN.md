@@ -24,8 +24,8 @@ Reference document for visual identity and the design system. Serves as the sing
 |---|---|---|
 | `--bg-base` | Base background | `#0A0A0F` |
 | `--bg-surface` | Secondary background (cards, surfaces) | `#12121A` |
-| `--blob-primary` | Primary blurred blob | `#7C3AED` |
-| `--blob-secondary` | Secondary blurred blob | `#4C1D95` |
+| `--blob-primary` | Primary blurred blob | `#160239` |
+| `--blob-secondary` | Secondary blurred blob | `#160239` (same hue as primary — blobs are differentiated by size/blur/opacity per instance, not color, per the approved reference) |
 | `--accent` | Accent/brand (button hover, links, focus) | `#8B5CF6` |
 | `--text-primary` | Primary text | `#F5F5F7` |
 | `--text-secondary` | Secondary text | `#F5F5F7` at 72% opacity |
@@ -113,7 +113,7 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 ### Buttons
 
 **Primary** (e.g. "Contact me", main CTA)
-- Base state: subtle glass fill (`--glass-fill` + `--border-glass` border).
+- Base state: solid dark purple fill (`background: #1E0447`, `border: 1px solid #383246`) — confirmed from the approved Claude Design export; not the generic white-tinted `--glass-fill`. This purple-tinted base is specific to primary buttons.
 - Hover: fills completely with `--accent`, text switches to white/high contrast, 200–250ms transition.
 - Shape: `rounded-full`.
 
@@ -128,9 +128,32 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 - Hover: slight elevation (`translateY(-4px)`) + intensified glass border.
 - Visual content (screenshots/GIFs) as the protagonist — the glass shouldn't compete with the content.
 
+### Background blobs (global layer)
+- Rendered as a single component, mounted once at the root layout (not duplicated per section).
+- Absolutely positioned, `pointer-events: none`, sitting behind all content (lowest z-index).
+- **Technique:** solid-color circles (`border-radius: 50%`) with `filter: blur()` — not `radial-gradient`. Confirmed from the approved Claude Design export.
+- **Exact values from the approved reference** (3 blobs, all using `--blob-primary`/`--blob-secondary`, i.e. the same near-black purple `#160239`):
+
+| Blob | Position | Size | Blur | Opacity |
+|---|---|---|---|---|
+| 1 | top-center, overlapping the navbar area (`top: -70px`, `left: 46%` in the reference's coordinate space) | 420×300px | 70px | 0.85 |
+| 2 | lower-right | 460×460px | 100px | 0.80 |
+| 3 | lower-left | 380×340px | 100px | 0.50 |
+
+- When adapting these to the actual global layer (which spans more viewport height than the reference's single-hero mockup), preserve the *relative composition* — one blob anchored near the top-center behind the navbar, one lower-right, one lower-left — using proportional/percentage positioning rather than copying the literal pixel values verbatim.
+- **Baseline:** the page background must still read as predominantly near-black (`--bg-base`) — the blobs are moody, low-key glow, not a bright saturated tint. If in doubt, the blob effect is too strong or too bright.
+
 ### Settings panel (gear icon)
 - Same glass treatment as the navbar.
-- Contains: light/dark theme toggle + ES/EN language selector.
+- Contains two Toggle Switches (see below): one for theme (dark/light), one for language (ES/EN).
+
+### Toggle switch (theme & language)
+- Track: `rounded-full`, ~72px wide × ~36px tall, base glass treatment (`--glass-fill` + `--border-glass`).
+- Thumb: circular, ~28px diameter, sits inside the track; filled with `--accent` when representing the active/selected state.
+- A text label sits beside the track (or inside it, opposite the thumb) showing the current state in words — e.g. "Dark" / "Light" for theme, "ES" / "ES" (current language code) for language — not just an icon alone, for clarity.
+- Icon inside the thumb: moon/sun for theme; for language, the thumb can just show the two-letter code of the *other* language (the one you'd switch to) or stay icon-less — implementation's call, as long as current state is legible from the label text.
+- Interaction: click/tap toggles the thumb position with a slide animation, 200–250ms transition (consistent with button hover timing in section 7).
+- Accessibility: `role="switch"`, `aria-checked` reflecting state, operable via keyboard (Enter/Space), with the standard focus-visible ring applied to the whole control.
 
 ### Focus state (keyboard navigation)
 - Every interactive element (nav links, buttons, gear icon, hamburger menu, cards if focusable) must show a visible focus state when navigated via `Tab`.
