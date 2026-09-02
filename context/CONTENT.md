@@ -42,6 +42,10 @@ Single source of truth for all copy/content on the site, in Spanish (`es`) and E
 
 ## 4. Skills
 
+| Key | ES | EN |
+|---|---|---|
+| `skills.intro` | He trabajado con lenguajes y tecnologías como Python, Java y JavaScript, y sigo ampliando mi stack constantemente. | I've worked with languages and technologies like Python, Java, and JavaScript, and I keep expanding my stack constantly. |
+
 | Category key | ES label | EN label |
 |---|---|---|
 | `skills.languages` | Lenguajes | Languages |
@@ -56,7 +60,7 @@ Single source of truth for all copy/content on the site, in Spanish (`es`) and E
 | Frontend | HTML, CSS, Tailwind CSS |
 | Backend | Flask |
 | Databases | PostgreSQL, SQL Server |
-| Tools & Others | Git, Docker *(learning / en aprendizaje)* |
+| Tools & Others | Git, Docker *(learning / en aprendizaje)*, Webpack, Vite |
 
 Note: technology names are proper nouns and are not translated. Only the "(learning)" tag is bilingual:
 

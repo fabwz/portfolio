@@ -188,6 +188,12 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 - If a technology has no official brand mark (e.g. a generic web API rather than a product), omit it from the stack list entirely rather than using a generic/unrelated icon or leaving it text-only inconsistent with the rest.
 - The "View on GitHub" link (Secondary button style) also uses the GitHub mark from the same icon set, for visual consistency.
 
+### Skills category icons
+- Each Skills category heading (Languages, Frontend, Backend, Databases, Tools & Others) carries a small generic/conceptual icon before its label — e.g. `</>` for Languages, a database icon for Databases — **not** brand logos (different from the Projects tech stack icons, which are brand marks for specific technologies). Since these are conceptual rather than brand-specific, every category can consistently have one, avoiding the inconsistency problem that ruled out per-technology icons here.
+- Source: `react-icons` (already installed for Projects) — a generic set like Feather Icons (`react-icons/fi`), not the brand-specific Simple Icons set used in Projects.
+- Color: monochrome, matching the category label's text color — not `--accent` (same reasoning as the Projects tech icons: purple is reserved for interactive elements).
+- Size: roughly 16-18px, sitting inline before the category label text.
+
 ### Settings panel (gear icon)
 - Same glass treatment as the navbar.
 - Contains two Toggle Switches (see below): one for theme (dark/light), one for language (ES/EN).
