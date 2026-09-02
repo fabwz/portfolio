@@ -59,6 +59,10 @@ export const dictionary = {
 
   // Contact — CONTENT.md section 6
   "contact.title": { es: "Contacto", en: "Contact" },
+  "contact.intro": {
+    es: "¡Construyamos algo juntos! Actualmente disponible para nuevos retos profesionales.",
+    en: "Let's build something together! Currently available for new professional challenges.",
+  },
   "contact.email_label": { es: "Correo", en: "Email" },
   "contact.linkedin_label": { es: "LinkedIn", en: "LinkedIn" },
   "contact.github_label": { es: "GitHub", en: "GitHub" },
@@ -72,6 +76,12 @@ export const dictionary = {
   // Settings panel toggle labels — CONTENT.md section 8
   "settings.theme_dark": { es: "Oscuro", en: "Dark" },
   "settings.theme_light": { es: "Claro", en: "Light" },
+
+  // Footer — CONTENT.md section 9
+  "footer.text": {
+    es: "© 2026 Fabián Zamora | Hecho con Next.js, TypeScript y Tailwind CSS",
+    en: "© 2026 Fabián Zamora | Built with Next.js, TypeScript, and Tailwind CSS",
+  },
 } as const satisfies Record<string, DictionaryEntry>;
 
 export type DictionaryKey = keyof typeof dictionary;
