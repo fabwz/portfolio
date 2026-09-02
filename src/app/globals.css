@@ -186,6 +186,21 @@ body {
   animation-delay: -12s;
 }
 
+/* Scroll reveal — DESIGN.md section 7: fade-in + subtle upward shift as a
+   section enters the viewport, one-time (see useScrollReveal hook). */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+
+.scroll-reveal[data-revealed="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Reduced motion — DESIGN.md section 7: every animation in this project
    (avatar floating, blob drift, scroll transitions) must respect this OS
    preference by disabling rather than ignoring it. */
@@ -195,5 +210,9 @@ body {
   .blob-drift-2,
   .blob-drift-3 {
     animation: none;
+  }
+
+  .scroll-reveal {
+    transition-duration: 1ms;
   }
 }
