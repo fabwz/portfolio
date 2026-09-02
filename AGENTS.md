@@ -171,6 +171,7 @@ Basic metadata is in scope for the MVP: page title, meta description, favicon, O
 - Claude Code must **never** run write commands: `add`, `commit`, `push`, `merge`, `branch`, `checkout`, `rebase`, or any other command that changes repo state.
 - Fabián executes all git actions manually.
 - **Branching:** one branch per feature/section (e.g. `feature/navbar`, `feature/hero-section`), merged into `main` manually by Fabián after review. Never work assuming direct commits to `main`.
+  - **Exception:** trivial, zero-risk config/infrastructure changes may be committed directly to `main` — but only when *all* of these hold: (1) it's a config/infra change, not UI, behavior, or content; (2) it touches a single file; (3) it needs no visual review, just a binary check (e.g. "did the thing disappear/appear as expected"). Example: toggling `devIndicators: false` in `next.config.ts`. Anything touching a component, styling, behavior, or copy still requires a branch — this exception is narrow on purpose, not a general shortcut.
 - **Commit convention:** Conventional Commits, in English, format `<type>(scope): <description>` — e.g. `feat(ui): add navbar liquid glass style`. Claude Code may suggest a commit message in this format when a task is done, but never executes the commit itself.
 
 ---
