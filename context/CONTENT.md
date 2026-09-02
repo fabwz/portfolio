@@ -23,7 +23,7 @@ Single source of truth for all copy/content on the site, in Spanish (`es`) and E
 | Key | ES | EN |
 |---|---|---|
 | `hero.title` | Soy Fabián Zamora | I'm Fabián Zamora |
-| `hero.tagline` | Estudiante de Ingeniería del Software apasionado por el desarrollo web y la arquitectura de software | Software Engineering student passionate about web development and software architecture |
+| `hero.tagline` | Estudiante de Ingeniería del Software apasionado por el desarrollo web y la arquitectura de software. | Software Engineering student passionate about web development and software architecture. |
 | `hero.cta` | Contáctame | Contact me |
 
 **Assets:** Hero avatar — static PNG generated with Leonardo.ai (already produced, needs adjustments per earlier conversation).
@@ -114,14 +114,14 @@ These are `aria-label` values for icon-only interactive elements (gear icon, ham
 
 ---
 
-## 8. Settings panel — toggle switch labels
+## 8. Settings panel labels
 
 | Key | ES | EN |
 |---|---|---|
 | `settings.theme_dark` | Oscuro | Dark |
 | `settings.theme_light` | Claro | Light |
 
-Visible state-label text for the theme Toggle Switch (`DESIGN.md` section 5, "Toggle switch"). The language toggle uses the current language code ("ES"/"EN") as its label — not a translated string.
+State labels shown next to the theme ToggleSwitch (DESIGN.md, "Toggle switch" subsection). The language ToggleSwitch does not need a translated label — its label is the language code itself (`ES`/`EN`), which isn't copy to translate.
 
 ---
 
