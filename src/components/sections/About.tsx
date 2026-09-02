@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 
@@ -17,9 +18,17 @@ export function About() {
         {t("nav.about")}
       </h2>
       <div className="text-text-secondary mx-auto mt-8 flex max-w-2xl flex-col gap-4">
-        <p className="text-base sm:text-lg">{t("about.paragraph1")}</p>
-        <p className="text-base sm:text-lg">{t("about.paragraph2")}</p>
-        <p className="text-base sm:text-lg">{t("about.paragraph3")}</p>
+        {(
+          ["about.paragraph1", "about.paragraph2", "about.paragraph3"] as const
+        ).map((key, index) => (
+          <p
+            key={key}
+            className="stagger-child text-base sm:text-lg"
+            style={{ "--stagger-delay": `${index * 70}ms` } as CSSProperties}
+          >
+            {t(key)}
+          </p>
+        ))}
       </div>
     </div>
   );

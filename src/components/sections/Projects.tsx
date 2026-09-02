@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 import { SiGithub, SiJavascript, SiTailwindcss, SiVite } from "react-icons/si";
 import { Card } from "@/components/ui/Card";
@@ -52,12 +53,17 @@ export function Projects() {
         </p>
 
         <div className="text-text-secondary mt-5 flex flex-wrap gap-x-5 gap-y-2">
-          {project.stack.map((tag) => {
+          {project.stack.map((tag, index) => {
             const Icon = STACK_ICONS[tag];
             return (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1.5 text-sm"
+                className="stagger-child inline-flex items-center gap-1.5 text-sm"
+                style={
+                  {
+                    "--stagger-delay": `${index * 70}ms`,
+                  } as CSSProperties
+                }
               >
                 {Icon && <Icon className="h-5 w-5" aria-hidden="true" />}
                 {tag}

@@ -210,13 +210,31 @@ body {
    section enters the viewport, one-time (see useScrollReveal hook). */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(40px);
   transition:
-    opacity 600ms ease,
-    transform 600ms ease;
+    opacity 550ms ease-out,
+    transform 550ms ease-out;
 }
 
 .scroll-reveal[data-revealed="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children — DESIGN.md section 7: repetitive content within a
+   section (Skills category blocks, Projects tech stack icons, About
+   paragraphs) reuses the parent's scroll-reveal trigger; only the
+   transition-delay is offset per child index (set via --stagger-delay). */
+.stagger-child {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 550ms ease-out,
+    transform 550ms ease-out;
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.scroll-reveal[data-revealed="true"] .stagger-child {
   opacity: 1;
   transform: translateY(0);
 }
@@ -232,7 +250,9 @@ body {
     animation: none;
   }
 
-  .scroll-reveal {
+  .scroll-reveal,
+  .stagger-child {
     transition-duration: 1ms;
+    transition-delay: 0ms;
   }
 }

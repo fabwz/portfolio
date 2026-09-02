@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 import {
   FiCode,
@@ -42,10 +43,16 @@ export function Skills() {
       </p>
 
       <div className="mx-auto mt-12 grid max-w-3xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
-        {skillCategories.map((category) => {
+        {skillCategories.map((category, index) => {
           const Icon = CATEGORY_ICONS[category.labelKey];
           return (
-            <div key={category.labelKey}>
+            <div
+              key={category.labelKey}
+              className="stagger-child"
+              style={
+                { "--stagger-delay": `${index * 70}ms` } as CSSProperties
+              }
+            >
               <h3 className="text-text-primary flex items-center gap-2 text-base font-medium">
                 {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
                 {t(category.labelKey)}
