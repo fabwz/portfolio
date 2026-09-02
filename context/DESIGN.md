@@ -208,6 +208,8 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 ### Settings panel (gear icon)
 - Same glass treatment as the navbar.
 - Contains two Toggle Switches (see below): one for theme (dark/light), one for language (ES/EN).
+- **Gear icon rotation:** the gear icon itself rotates (e.g. 90–180°) when the panel opens, and rotates back to its original position when it closes — same transition timing as the panel entrance below, so both animate in sync.
+- **Panel entrance animation:** scale from ~0.95→1 combined with `opacity` 0→1, ~200ms `ease-out` — a subtle "pop" rather than an abrupt appearance. Reverse (fade+scale down) on close. Respects `prefers-reduced-motion` like every other animation in the project.
 
 ### Toggle switch (theme & language)
 - Track: `rounded-full`, ~72px wide × ~36px tall, base glass treatment (`--glass-fill` + `--border-glass`).
