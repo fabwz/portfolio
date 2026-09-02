@@ -46,7 +46,7 @@ Reference document for visual identity and the design system. Serves as the sing
 | `--border-glass` | Borders of glass elements | `rgba(0,0,0,0.10)` |
 | `--glass-fill` | Base fill of glass surfaces | `rgba(0,0,0,0.05)` |
 
-**Text hierarchy rule:** primary and secondary text share the same base color in each mode; hierarchy is achieved solely through opacity (72%), never through a different color tone. Do not introduce intermediate grays as a text color.
+**Text hierarchy rule:** primary and secondary text share the same base color in each mode by default, with hierarchy achieved through opacity (72%). **Exception:** the Hero tagline specifically uses a dedicated muted hex (`#B4B4C4` in dark mode) instead of the opacity-based approach, per the approved Claude Design reference — this is a deliberate, scoped exception for that one element, not a change to the general rule. Do not extend this hex to other secondary text elsewhere without approval.
 
 **Accent consistency rule:** `--accent` (`#8B5CF6`) is identical in both modes — it's the personal brand color and must not vary when switching themes.
 
@@ -62,6 +62,11 @@ Reference document for visual identity and the design system. Serves as the sing
 - Load both via `next/font` (Google Fonts), no external CDN.
 - Use the serif/sans-serif mix sparingly: only large titles use Instrument Serif. Everything else is Geist.
 - No logo or graphic wordmark — the navbar uses only the name as text (Geist).
+- **Hero title glow:** the Hero's `<h1>` specifically carries a subtle purple text-shadow (confirmed from the approved reference), simulating ambient light from the background blob positioned behind it:
+  ```css
+  text-shadow: 0 0 18px rgba(139,92,246,0.55), 0 0 46px rgba(124,58,237,0.35);
+  ```
+  This is scoped to the Hero title only — do not apply it to other headings without approval, and keep the intensity as specified (subtle), not stronger.
 
 ---
 
@@ -105,16 +110,41 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 
 ### Navbar
 - Shape: `rounded-full` (pill), floating, horizontally centered with top margin.
-- Exaggerated glass effect (see section 4).
+- **Exaggerated glass effect — specific parameters (stronger than the generic section 4 baseline, confirmed from the approved reference export):**
+  ```css
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  backdrop-filter: blur(36px) saturate(200%);
+  -webkit-backdrop-filter: blur(36px) saturate(200%);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35),
+              inset 0 1px 0 rgba(255,255,255,0.5),
+              inset 0 -1px 0 rgba(255,255,255,0.08);
+  ```
+  The inset highlights simulate a glossy top edge and subtle bottom shadow — this is what makes the glass read as "exaggerated" rather than a flat translucent panel. Apply the same treatment to SettingsPanel and MobileMenu (they already share the navbar's glass treatment per their own subsections below).
 - Scroll behavior: on scrolling down, `--glass-fill` increases its opacity (from ~8% to ~20%) to improve readability over content passing behind it. Position: `fixed`/`sticky`, without changing size.
 - Content: no name/logo/wordmark — navigation links centered within the pill, gear icon (⚙) on the far right that opens the settings panel (ES/EN language + light/dark theme). Personal identity is carried by the Hero title ("Soy Fabián Zamora"), not the navbar.
 - Mobile: collapses into a menu icon (hamburger) within the same glass pill; opens a drawer/panel with the links.
+- **Stacking order (important — prevents background blobs rendering in front of the navbar):** the navbar must have an explicit `z-index: 10` (or higher than the Hero content and background blobs) so it always renders above them regardless of theme.
 
 ### Buttons
 
 **Primary** (e.g. "Contact me", main CTA)
-- Base state: solid dark purple fill (`background: #1E0447`, `border: 1px solid #383246`) — confirmed from the approved Claude Design export; not the generic white-tinted `--glass-fill`. This purple-tinted base is specific to primary buttons.
-- Hover: fills completely with `--accent`, text switches to white/high contrast, 200–250ms transition.
+- Base state: solid dark purple fill with glass treatment — confirmed exact values from the approved Claude Design export:
+  ```css
+  background-color: #1E0447;
+  border: 1px solid #383246;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 10px 34px rgba(56,30,112,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  ```
+  **These values are fixed and do not change between dark/light theme** — the primary button keeps the same look in both modes, it does not invert like the page background/text does.
+- Hover: fills completely with `--accent` (`#7C3AED`), border matches, text switches to white/high contrast, updated glow:
+  ```css
+  background: #7C3AED;
+  border-color: #7C3AED;
+  box-shadow: 0 10px 34px rgba(124,58,237,0.5), inset 0 1px 0 rgba(255,255,255,0.5);
+  ```
+  Transition 200–250ms on background/border/box-shadow.
 - Shape: `rounded-full`.
 
 **Secondary** (e.g. internal links, "View project")
@@ -142,6 +172,7 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 
 - When adapting these to the actual global layer (which spans more viewport height than the reference's single-hero mockup), preserve the *relative composition* — one blob anchored near the top-center behind the navbar, one lower-right, one lower-left — using proportional/percentage positioning rather than copying the literal pixel values verbatim.
 - **Baseline:** the page background must still read as predominantly near-black (`--bg-base`) — the blobs are moody, low-key glow, not a bright saturated tint. If in doubt, the blob effect is too strong or too bright.
+- **Stacking order (important):** the blob layer must have a low/no explicit `z-index` (e.g. `z-index: 0` or unset) and sit first in the DOM, so it always renders **behind** the navbar (`z-index: 10`) and page content (`z-index: 5`) — in both themes. If blobs appear to render in front of content in either theme, this is a bug, not a style choice.
 
 ### Settings panel (gear icon)
 - Same glass treatment as the navbar.
@@ -149,10 +180,11 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 
 ### Toggle switch (theme & language)
 - Track: `rounded-full`, ~72px wide × ~36px tall, base glass treatment (`--glass-fill` + `--border-glass`).
-- Thumb: circular, ~28px diameter, sits inside the track; filled with `--accent` when representing the active/selected state.
-- A text label sits beside the track (or inside it, opposite the thumb) showing the current state in words — e.g. "Dark" / "Light" for theme, "ES" / "ES" (current language code) for language — not just an icon alone, for clarity.
-- Icon inside the thumb: moon/sun for theme; for language, the thumb can just show the two-letter code of the *other* language (the one you'd switch to) or stay icon-less — implementation's call, as long as current state is legible from the label text.
-- Interaction: click/tap toggles the thumb position with a slide animation, 200–250ms transition (consistent with button hover timing in section 7).
+- Thumb: circular, ~28px diameter, sits inside the track, slides between two positions with a 200–250ms transition (consistent with button hover timing in section 7).
+- **No external text label** (revised — the sun/moon icon and ES/EN text inside the thumb are sufficient, an outside label like "Dark"/"Light" is redundant):
+  - **Theme switch:** the thumb itself displays a sun icon (light mode active) or moon icon (dark mode active), swapping as it slides.
+  - **Language switch:** the thumb itself displays the text "ES" or "EN" (matching the currently active language), swapping as it slides — same pattern as the theme switch, not a separate visual language.
+- **Thumb color:** always filled with `--accent`, solid and clearly visible, in **both** positions and **both** themes. Neither switch has a true "off"/inactive state — dark/light and ES/EN are both equally valid selections, not an on/off toggle — so the thumb must never become low-contrast or hard to see regardless of which side it's on or which theme is active. (This was a real bug: the language thumb was nearly invisible in light mode when set to EN — must not recur.)
 - Accessibility: `role="switch"`, `aria-checked` reflecting state, operable via keyboard (Enter/Space), with the standard focus-visible ring applied to the whole control.
 
 ### Focus state (keyboard navigation)
@@ -182,7 +214,9 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 | Buttons (hover) | Color/fill transition | 200–250ms |
 | Sections on scroll | Fade-in + subtle shift | `opacity` 0→1, `translateY` 20px→0, via `IntersectionObserver` (no libraries) |
 | Theme change (dark/light) | Smooth color transition | ~300ms on background and text, avoids abrupt jump |
-| Background blobs | Optional slow movement | To be confirmed during implementation based on performance impact; if implemented, must be extremely subtle and slow |
+| Background blobs | Slow drift | `transform: translate()` oscillating ~±30px on both axes, ~25–30s duration, `ease-in-out`, `infinite alternate` — subtle and slow enough to feel ambient, not distracting. Use `transform`, not `top`/`left`, for GPU-accelerated performance. |
+
+**Reduced motion:** every animation in this table (avatar floating, button/scroll transitions, blob drift) must respect the `prefers-reduced-motion: reduce` media query — when active, disable or drastically shorten these animations rather than ignoring the user's OS-level accessibility preference.
 
 ---
 
