@@ -9,6 +9,6 @@ export const projects: Project[] = [
     ctaKey: "project.wc26.cta",
     stack: ["JavaScript (Vanilla)", "Tailwind CSS", "Vite"],
     repoUrl: "https://github.com/fabwz/wc26-client-isw521",
-    mediaPath: "/images/projects/wc26/wc26-project-demonstration.gif",
+    mediaPath: "/images/projects/wc26/wc26-demo.mp4",
   },
 ];
