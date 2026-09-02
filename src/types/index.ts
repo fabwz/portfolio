@@ -11,3 +11,9 @@ export interface Project {
   repoUrl: string;
   mediaPath: string;
 }
+
+export interface SkillCategory {
+  labelKey: DictionaryKey;
+  items: string[];
+  learningItem?: string;
+}
