@@ -134,28 +134,16 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
   The inset highlights simulate a glossy top edge and subtle bottom shadow — this is what makes the glass read as "exaggerated" rather than a flat translucent panel. Apply the same corrected treatment to SettingsPanel and MobileMenu (they already share the navbar's glass treatment per their own subsections below).
 - **Appearance stays constant at all scroll positions** — no dynamic opacity change on scroll. The corrected glass treatment above is strong enough on its own to stay legible over any content passing behind it, in both themes. Position: `fixed`/`sticky`, without changing size or appearance.
 - Content: no name/logo/wordmark — navigation links centered within the pill, gear icon (⚙) on the far right that opens the settings panel (ES/EN language + light/dark theme). Personal identity is carried by the Hero title ("Soy Fabián Zamora"), not the navbar.
+- **Active section indicator:** as the user scrolls, the nav link corresponding to the currently-visible section is marked with `--accent` text color and a thin animated underline beneath it (fades/slides in, ~150-200ms transition — not an instant snap). Tracked via the same `IntersectionObserver` pattern already used for scroll-reveal, but continuous (tracks which section is most in-view at all times), not a one-time reveal.
+- **Hover:** the same accent color + underline treatment applies temporarily on `:hover`/mouse-over of any link, independent of scroll position — disappears on mouse-leave, no click needed. Do **not** apply the primary button's liquid-fill effect here — that's reserved for the Hero CTA specifically; repeating it across 5 small nav links would feel noisy and violate the "don't over-apply" principle in section 1.
 - Mobile: collapses into a menu icon (hamburger) within the same glass pill; opens a drawer/panel with the links.
 - **Stacking order (important — prevents background blobs rendering in front of the navbar):** the navbar must have an explicit `z-index: 10` (or higher than the Hero content and background blobs) so it always renders above them regardless of theme.
 
 ### Buttons
 
 **Primary** (e.g. "Contact me", main CTA)
-- Base state: solid dark purple fill with glass treatment — confirmed exact values from the approved Claude Design export:
-  ```css
-  background-color: #1E0447;
-  border: 1px solid #383246;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 10px 34px rgba(56,30,112,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
-  ```
-  **These values are fixed and do not change between dark/light theme** — the primary button keeps the same look in both modes, it does not invert like the page background/text does.
-- Hover: fills completely with `--accent` (`#7C3AED`), border matches, text switches to white/high contrast, updated glow:
-  ```css
-  background: #7C3AED;
-  border-color: #7C3AED;
-  box-shadow: 0 10px 34px rgba(124,58,237,0.5), inset 0 1px 0 rgba(255,255,255,0.5);
-  ```
-  Transition 200–250ms on background/border/box-shadow.
+- Base state: transparent glass, matching the Navbar's corrected theme-tinted glass treatment (section 5) — `background: rgba(bg-base, 0.75)`-equivalent per theme, `border: 1px solid var(--border-glass)`, same blur. **This replaces the earlier solid dark-purple base (`#1E0447`)** — deliberate revision, not an oversight; the button now visually matches the navbar's glass language at rest.
+- Hover: **liquid/blob fill effect** — a circular fill in `--accent` grows outward from the point where the cursor enters the button (not a flat background-color swap), expanding to cover the whole button by the time the hover transition completes, and receding back out on mouse leave. Text switches to white/high-contrast once the fill passes underneath it. Conceptually inspired by an organic "liquid" fill (ties into the "Liquid Glass" identity), implemented practically via a `radial-gradient`/pseudo-element positioned at the cursor's entry coordinates (tracked via CSS custom properties updated on `mouseenter`/`mousemove`) — not a hand-drawn SVG blob shape (too fragile/costly for the visual gain).
 - Shape: `rounded-full`.
 
 **Secondary** (e.g. internal links, "View project")
