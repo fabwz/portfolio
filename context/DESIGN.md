@@ -110,18 +110,29 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 
 ### Navbar
 - Shape: `rounded-full` (pill), floating, horizontally centered with top margin.
-- **Exaggerated glass effect — specific parameters (stronger than the generic section 4 baseline, confirmed from the approved reference export):**
+- **Exaggerated glass effect — specific parameters (stronger than the generic section 4 baseline, root-cause-corrected after a real legibility bug):**
   ```css
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.22);
+  /* Dark mode */
+  background: rgba(10, 10, 15, 0.75);   /* tinted with --bg-base, not white */
+  border: 1px solid rgba(255,255,255,0.14);
   backdrop-filter: blur(36px) saturate(200%);
   -webkit-backdrop-filter: blur(36px) saturate(200%);
   box-shadow: 0 8px 32px rgba(0,0,0,0.35),
               inset 0 1px 0 rgba(255,255,255,0.5),
               inset 0 -1px 0 rgba(255,255,255,0.08);
+
+  /* Light mode */
+  background: rgba(250, 250, 250, 0.75); /* tinted with --bg-base, not black */
+  border: 1px solid rgba(0,0,0,0.10);
+  backdrop-filter: blur(36px) saturate(200%);
+  -webkit-backdrop-filter: blur(36px) saturate(200%);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12),
+              inset 0 1px 0 rgba(255,255,255,0.6),
+              inset 0 -1px 0 rgba(0,0,0,0.04);
   ```
-  The inset highlights simulate a glossy top edge and subtle bottom shadow — this is what makes the glass read as "exaggerated" rather than a flat translucent panel. Apply the same treatment to SettingsPanel and MobileMenu (they already share the navbar's glass treatment per their own subsections below).
-- Scroll behavior: on scrolling down, `--glass-fill` increases its opacity (from ~8% to ~20%) to improve readability over content passing behind it. Position: `fixed`/`sticky`, without changing size.
+  **Why the tint changed from white to each theme's own `--bg-base`:** a white tint (even at higher opacity) doesn't meaningfully reduce contrast against light-colored text passing behind it in dark mode — the earlier version caused a real bug where body text remained legible and bled into the nav links, both becoming unreadable together. Tinting with the theme's own base color (near-black in dark mode, near-white in light mode) actually obscures content behind it, which is the entire point of the effect. This is a correction, not a style preference — do not revert to a white-based tint even at higher opacity.
+  The inset highlights simulate a glossy top edge and subtle bottom shadow — this is what makes the glass read as "exaggerated" rather than a flat translucent panel. Apply the same corrected treatment to SettingsPanel and MobileMenu (they already share the navbar's glass treatment per their own subsections below).
+- **Appearance stays constant at all scroll positions** — no dynamic opacity change on scroll. The corrected glass treatment above is strong enough on its own to stay legible over any content passing behind it, in both themes. Position: `fixed`/`sticky`, without changing size or appearance.
 - Content: no name/logo/wordmark — navigation links centered within the pill, gear icon (⚙) on the far right that opens the settings panel (ES/EN language + light/dark theme). Personal identity is carried by the Hero title ("Soy Fabián Zamora"), not the navbar.
 - Mobile: collapses into a menu icon (hamburger) within the same glass pill; opens a drawer/panel with the links.
 - **Stacking order (important — prevents background blobs rendering in front of the navbar):** the navbar must have an explicit `z-index: 10` (or higher than the Hero content and background blobs) so it always renders above them regardless of theme.
