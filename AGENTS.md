@@ -1,14 +1,6 @@
 # AGENTS.md — Fabián Zamora Portfolio
 
-> **How this file works:** `create-next-app` auto-generates a managed block at the top of this file (between `<!-- BEGIN:nextjs-agent-rules -->
-
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->`) pointing agents to Next.js's version-matched bundled docs. Never edit inside that block — Next.js updates it automatically on future upgrades. Everything below it is project-specific and belongs to this project, not to Next.js.
+> **How this file works:** `create-next-app` auto-generates a managed block at the top of this file (between `<!-- BEGIN:nextjs-agent-rules -->` and `<!-- END:nextjs-agent-rules -->`) pointing agents to Next.js's version-matched bundled docs. Never edit inside that block — Next.js updates it automatically on future upgrades. Everything below it is project-specific and belongs to this project, not to Next.js.
 >
 > The root `CLAUDE.md` that `create-next-app` also generates is a one-line pointer (`@AGENTS.md`) — leave it as-is. **This file is where all real project instructions live.** There is no separate `.claude/CLAUDE.md` for this project.
 
@@ -110,6 +102,8 @@ portfolio/
     ├── data/
     │   ├── projects.ts
     │   └── skills.ts
+    ├── hooks/
+    │   └── useScrollReveal.ts
     ├── lib/
     │   └── i18n/
     │       ├── dictionary.ts
