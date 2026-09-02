@@ -85,28 +85,45 @@ body {
     inset 0 -1px 0 rgba(0, 0, 0, 0.04);
 }
 
-/* Primary button — DESIGN.md section 5 "Buttons/Primary". Values are fixed
-   and do not change between dark/light theme. */
+/* Primary button — DESIGN.md section 5 "Buttons/Primary". Base state now
+   matches the Navbar's exact glass treatment (applied via the shared
+   .navbar-glass class); this layer only adds the liquid-fill hover effect
+   on top of it. The fill is a radial pseudo-element that grows from the
+   cursor's entry point (tracked via --btn-x/--btn-y, updated on
+   mouseenter/mousemove in Hero.tsx) to a size guaranteed to cover the
+   button from any origin (--btn-spread = button diagonal * 2, computed on
+   mouseenter), then recedes back on mouse-leave. */
 .btn-primary {
-  background-color: #1e0447;
-  border: 1px solid #383246;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow:
-    0 10px 34px rgba(56, 30, 112, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--text-primary);
+  transition: color 200ms ease 150ms;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: var(--btn-y, 50%);
+  left: var(--btn-x, 50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%, -50%);
   transition:
-    background-color 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease;
+    width 450ms ease,
+    height 450ms ease;
+  z-index: -1;
 }
 
 .btn-primary:hover {
-  background-color: #7c3aed;
-  border-color: #7c3aed;
-  box-shadow:
-    0 10px 34px rgba(124, 58, 237, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.btn-primary:hover::before {
+  width: var(--btn-spread, 300%);
+  height: var(--btn-spread, 300%);
 }
 
 /* Secondary button — DESIGN.md section 5 "Buttons/Secondary". No fill at
@@ -123,6 +140,43 @@ body {
 .btn-secondary:hover {
   border-color: var(--accent);
   background: var(--glass-fill);
+}
+
+/* Navbar links — DESIGN.md section 5 "Navbar" active-section indicator &
+   hover: --accent text + a thin underline that fades/slides in, shared by
+   both the scroll-driven active state (data-active, see useActiveSection)
+   and plain :hover, independent of scroll position. */
+.nav-link {
+  position: relative;
+  color: var(--text-primary);
+  transition: color 180ms ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  right: 0.5rem;
+  bottom: -2px;
+  left: 0.5rem;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--accent);
+  opacity: 0;
+  transform: scaleX(0);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.nav-link:hover,
+.nav-link[data-active="true"] {
+  color: var(--accent);
+}
+
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 /* Hero title glow — DESIGN.md section 3, scoped to the Hero <h1> only. */
@@ -280,7 +334,11 @@ body {
   .scroll-reveal,
   .stagger-child,
   .settings-panel,
-  .settings-panel[data-open="true"] {
+  .settings-panel[data-open="true"],
+  .nav-link,
+  .nav-link::after,
+  .btn-primary,
+  .btn-primary::before {
     transition-duration: 1ms;
     transition-delay: 0ms;
   }

@@ -2,6 +2,7 @@
 
 import type { DictionaryKey } from "@/lib/i18n/dictionary";
 import { useTranslation } from "@/lib/i18n/useTranslation";
+import { useActiveSection } from "@/hooks/useActiveSection";
 import { MobileMenu } from "./MobileMenu";
 import { SettingsPanel } from "./SettingsPanel";
 
@@ -18,8 +19,11 @@ const NAV_LINKS: NavLink[] = [
   { key: "nav.contact", href: "#contact" },
 ];
 
+const SECTION_IDS = NAV_LINKS.map((link) => link.href.slice(1));
+
 export function Navbar() {
   const { t } = useTranslation();
+  const activeId = useActiveSection(SECTION_IDS);
 
   return (
     <header className="fixed inset-x-0 top-6 z-10 flex justify-center px-4">
@@ -31,7 +35,8 @@ export function Navbar() {
             <li key={link.key}>
               <a
                 href={link.href}
-                className="focus-ring text-text-primary hover:text-accent rounded-full px-2 py-1 text-sm font-medium transition-colors"
+                data-active={link.href.slice(1) === activeId}
+                className="nav-link focus-ring rounded-full px-2 py-1 text-sm font-medium"
               >
                 {t(link.key)}
               </a>
