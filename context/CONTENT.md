@@ -140,4 +140,16 @@ Plain text, centered, no glass treatment — minimal closing line. Does not repe
 
 ---
 
+## 10. SEO metadata & browser tab title
+
+| Key | ES | EN |
+|---|---|---|
+| `meta.title` | Fabián Zamora \| Portafolio | Fabián Zamora \| Portfolio |
+| `meta.description` | Portafolio de Fabián Zamora, estudiante de Ingeniería del Software apasionado por el desarrollo web y la arquitectura de software. | Portfolio of Fabián Zamora, a Software Engineering student passionate about web development and software architecture. |
+
+- `meta.title`/`meta.description` (Spanish values) are used as the static server-rendered metadata (`<title>`, meta description, Open Graph tags) — fixed in Spanish since server-rendered metadata can't reflect the client-side language toggle, consistent with Spanish being the site's default language.
+- Separately, `meta.title` is also used to update the visible browser tab title dynamically on the client when the user toggles language (cosmetic layer on top of the static metadata, not a replacement for it).
+
+---
+
 *Source of truth for all site copy. Any new text added to the project must be added here first, in both languages, before being implemented in code.*
