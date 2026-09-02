@@ -105,6 +105,22 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
+/* Secondary button — DESIGN.md section 5 "Buttons/Secondary". No fill at
+   rest, only the glass border; hover intensifies border + adds a light
+   glass fill (short of the primary button's solid fill). */
+.btn-secondary {
+  border: 1px solid var(--border-glass);
+  background: transparent;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  background: var(--glass-fill);
+}
+
 /* Hero title glow — DESIGN.md section 3, scoped to the Hero <h1> only. */
 .hero-title-glow {
   text-shadow:
