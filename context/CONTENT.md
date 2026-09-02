@@ -93,6 +93,7 @@ Note: technology names are proper nouns and are not translated. Only the "(learn
 | Key | ES | EN |
 |---|---|---|
 | `contact.title` | Contacto | Contact |
+| `contact.intro` | ¡Construyamos algo juntos! Actualmente disponible para nuevos retos profesionales. | Let's build something together! Currently available for new professional challenges. |
 | `contact.email_label` | Correo | Email |
 | `contact.linkedin_label` | LinkedIn | LinkedIn |
 | `contact.github_label` | GitHub | GitHub |
@@ -126,6 +127,16 @@ These are `aria-label` values for icon-only interactive elements (gear icon, ham
 | `settings.theme_light` | Claro | Light |
 
 State labels shown next to the theme ToggleSwitch (DESIGN.md, "Toggle switch" subsection). The language ToggleSwitch does not need a translated label — its label is the language code itself (`ES`/`EN`), which isn't copy to translate.
+
+---
+
+## 9. Footer
+
+| Key | ES | EN |
+|---|---|---|
+| `footer.text` | © 2026 Fabián Zamora \| Hecho con Next.js, TypeScript y Tailwind CSS | © 2026 Fabián Zamora \| Built with Next.js, TypeScript, and Tailwind CSS |
+
+Plain text, centered, no glass treatment — minimal closing line. Does not repeat the Contact section's links (avoids redundancy, per project decision).
 
 ---
 
