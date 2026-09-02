@@ -29,6 +29,7 @@ export function Hero() {
           alt=""
           fill
           priority
+          fetchPriority="high"
           sizes="(min-width: 768px) 384px, 256px"
           className="scale-[1.08] object-cover"
           style={{ objectPosition: "40% 46%" }}
