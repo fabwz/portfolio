@@ -243,7 +243,8 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 |---|---|---|
 | Hero avatar | Continuous floating | `translateY` oscillating ±8px, infinite loop, 4–6s, `ease-in-out` |
 | Buttons (hover) | Color/fill transition | 200–250ms |
-| Sections on scroll | Fade-in + subtle shift | `opacity` 0→1, `translateY` 20px→0, via `IntersectionObserver` (no libraries) |
+| Sections on scroll | Fade-in + shift | `opacity` 0→1, `translateY` 40px→0 (increased from the original 20px — the subtler version wasn't noticeable enough), via `IntersectionObserver` (no libraries), ~500-600ms duration, `ease-out` |
+| Staggered children (within a section) | Sequential fade-in | For repetitive content within a single section (Skills category blocks, Projects tech stack icons, About paragraphs): reuse the same parent-level `useScrollReveal` trigger (no per-child observers) — apply a `transition-delay` calculated per child index (~60-80ms increment per item, capped at a reasonable max e.g. ~500ms total so a long list doesn't take forever to finish appearing). Each child otherwise follows the same fade-in + shift treatment as the row above, just offset in time. |
 | Theme change (dark/light) | Smooth color transition | ~300ms on background and text, avoids abrupt jump |
 | Background blobs | Slow drift | `transform: translate()` oscillating ~±30px on both axes, ~25–30s duration, `ease-in-out`, `infinite alternate` — subtle and slow enough to feel ambient, not distracting. Use `transform`, not `top`/`left`, for GPU-accelerated performance. |
 
