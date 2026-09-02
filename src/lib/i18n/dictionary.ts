@@ -51,7 +51,7 @@ export const dictionary = {
     es: "El reto técnico principal fue el manejo robusto de errores de red: sesiones expiradas, límite de peticiones con reintento automático y caché offline con localStorage — todo implementado sin frameworks ni librerías externas, solo JavaScript ES6+ y fetch nativo.",
     en: "The main technical challenge was robust error handling: expired sessions, rate limiting with automatic backoff, and offline caching with localStorage — all implemented without frameworks or external libraries, using only vanilla ES6+ JavaScript and native fetch.",
   },
-  "project.wc26.cta": { es: "Ver repositorio", en: "View repository" },
+  "project.wc26.cta": { es: "Ver en GitHub", en: "View on GitHub" },
 
   // Contact — CONTENT.md section 6
   "contact.title": { es: "Contacto", en: "Contact" },
