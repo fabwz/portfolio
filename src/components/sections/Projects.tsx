@@ -31,9 +31,13 @@ export function Projects() {
       </h2>
 
       <Card className="mx-auto mt-8 max-w-3xl">
-        <img
-          src={project.mediaPath}
-          alt={t(project.titleKey)}
+        <video
+          src={isRevealed ? project.mediaPath : undefined}
+          preload="none"
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full rounded-xl"
         />
 
