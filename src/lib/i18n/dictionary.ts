@@ -82,6 +82,15 @@ export const dictionary = {
     es: "© 2026 Fabián Zamora | Hecho con Next.js, TypeScript y Tailwind CSS",
     en: "© 2026 Fabián Zamora | Built with Next.js, TypeScript, and Tailwind CSS",
   },
+  // SEO metadata & browser tab title — CONTENT.md section 10
+  "meta.title": {
+    es: "Fabián Zamora | Portafolio",
+    en: "Fabián Zamora | Portfolio",
+  },
+  "meta.description": {
+    es: "Portafolio de Fabián Zamora, estudiante de Ingeniería del Software apasionado por el desarrollo web y la arquitectura de software.",
+    en: "Portfolio of Fabián Zamora, a Software Engineering student passionate about web development and software architecture.",
+  },
 } as const satisfies Record<string, DictionaryEntry>;
 
 export type DictionaryKey = keyof typeof dictionary;

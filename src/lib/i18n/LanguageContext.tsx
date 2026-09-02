@@ -8,6 +8,7 @@ import {
 } from "react";
 import type { ReactNode } from "react";
 import type { Language } from "@/types";
+import { dictionary } from "./dictionary";
 
 interface LanguageContextValue {
   language: Language;
@@ -59,6 +60,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = getHtmlLang(language);
+  }, [language]);
+
+  useEffect(() => {
+    document.title = dictionary["meta.title"][language];
   }, [language]);
 
   return (
