@@ -17,7 +17,7 @@ function GearIcon() {
       strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-5 w-5"
+      className="h-4 w-4"
     >
       <circle cx="12" cy="12" r="3" />
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" />
@@ -108,27 +108,24 @@ export function SettingsPanel() {
         onClick={() => setOpen((value) => !value)}
         aria-label={t("a11y.theme_toggle")}
         aria-expanded={open}
-        className="focus-ring border-border-glass text-text-primary hover:text-accent flex h-9 w-9 items-center justify-center rounded-full border transition-colors"
+        className="focus-ring border-border-glass text-text-primary hover:text-accent flex h-8 w-8 items-center justify-center rounded-full border transition-colors"
       >
         <GearIcon />
       </button>
 
       {open && (
-        <div className="border-border-glass bg-glass-fill absolute top-full right-0 mt-3 flex w-fit flex-col gap-3 rounded-2xl border p-3 shadow-[0_8px_32px_rgba(0,0,0,0.24)] backdrop-blur-[24px] backdrop-saturate-150">
+        <div className="navbar-glass absolute top-full right-0 mt-3 flex w-fit flex-col gap-2 rounded-2xl p-2.5">
           <ToggleSwitch
             checked={isDark}
             onChange={toggleTheme}
             ariaLabel={t("a11y.theme_toggle")}
-            label={
-              isDark ? t("settings.theme_dark") : t("settings.theme_light")
-            }
-            icon={isDark ? <MoonIcon /> : <SunIcon />}
+            thumbContent={isDark ? <MoonIcon /> : <SunIcon />}
           />
           <ToggleSwitch
             checked={language === "en"}
             onChange={toggleLanguage}
             ariaLabel={t("a11y.language_toggle")}
-            label={language.toUpperCase()}
+            thumbContent={language.toUpperCase()}
           />
         </div>
       )}

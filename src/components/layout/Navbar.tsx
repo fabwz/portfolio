@@ -33,19 +33,19 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-6 z-50 flex justify-center px-4">
+    <header className="fixed inset-x-0 top-6 z-10 flex justify-center px-4">
       <nav
         data-scrolled={scrolled}
-        className="navbar-glass border-border-glass grid w-full grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full border px-3 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.24)] backdrop-blur-[24px] backdrop-saturate-150 md:flex md:w-fit md:gap-6 md:px-4 md:py-2"
+        className="navbar-glass grid w-full grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full px-2 py-1.5 md:flex md:w-fit md:gap-2 md:px-3 md:py-1.5"
       >
         <MobileMenu links={NAV_LINKS} />
 
-        <ul className="col-start-2 hidden items-center justify-center gap-4 md:flex">
+        <ul className="col-start-2 hidden items-center justify-center gap-1 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.key}>
               <a
                 href={link.href}
-                className="focus-ring text-text-primary hover:text-accent rounded-full px-2.5 py-1.5 text-sm font-medium transition-colors"
+                className="focus-ring text-text-primary hover:text-accent rounded-full px-2 py-1 text-sm font-medium transition-colors"
               >
                 {t(link.key)}
               </a>

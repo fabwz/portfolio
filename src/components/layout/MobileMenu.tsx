@@ -14,7 +14,7 @@ function HamburgerIcon() {
       strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-5 w-5"
+      className="h-4 w-4"
     >
       <path d="M4 7h16M4 12h16M4 17h16" />
     </svg>
@@ -31,7 +31,7 @@ function CloseIcon() {
       strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-5 w-5"
+      className="h-4 w-4"
     >
       <path d="M18 6 6 18M6 6l12 12" />
     </svg>
@@ -72,13 +72,13 @@ export function MobileMenu({ links }: MobileMenuProps) {
         onClick={() => setOpen((value) => !value)}
         aria-label={open ? t("a11y.menu_close") : t("a11y.menu_open")}
         aria-expanded={open}
-        className="focus-ring border-border-glass text-text-primary hover:text-accent flex h-9 w-9 items-center justify-center rounded-full border transition-colors"
+        className="focus-ring border-border-glass text-text-primary hover:text-accent flex h-8 w-8 items-center justify-center rounded-full border transition-colors"
       >
         {open ? <CloseIcon /> : <HamburgerIcon />}
       </button>
 
       {open && (
-        <div className="border-border-glass bg-glass-fill absolute top-full left-0 mt-3 w-48 rounded-2xl border p-2 shadow-[0_8px_32px_rgba(0,0,0,0.24)] backdrop-blur-[24px] backdrop-saturate-150">
+        <div className="navbar-glass absolute top-full left-0 mt-3 w-48 rounded-2xl p-2">
           <ul className="flex flex-col">
             {links.map((link) => (
               <li key={link.key}>

@@ -59,21 +59,57 @@ body {
     color 300ms ease;
 }
 
-/* Navbar scroll behavior — DESIGN.md section 5: --glass-fill opacity
-   increases from ~8% to ~20% on scroll (dark mode value given explicitly;
-   light mode scaled proportionally from its own base --glass-fill, since
-   DESIGN.md doesn't specify a light-mode figure). */
+/* Navbar glass — DESIGN.md section 5 "Navbar": exaggerated glass params,
+   stronger than the generic section 4 baseline. Fixed rgba(white) values,
+   same in both themes (same principle as the primary button not inverting
+   with theme) — also shared by SettingsPanel and MobileMenu dropdowns. */
 .navbar-glass {
-  background: var(--glass-fill);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(36px) saturate(200%);
+  -webkit-backdrop-filter: blur(36px) saturate(200%);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
   transition: background-color 300ms ease;
 }
 
+/* Scroll behavior — DESIGN.md section 5: opacity increases on scroll to
+   improve readability over content passing behind it. */
 .navbar-glass[data-scrolled="true"] {
-  background: rgb(255 255 255 / 20%);
+  background: rgba(255, 255, 255, 0.22);
 }
 
-.light .navbar-glass[data-scrolled="true"] {
-  background: rgb(0 0 0 / 12%);
+/* Primary button — DESIGN.md section 5 "Buttons/Primary". Values are fixed
+   and do not change between dark/light theme. */
+.btn-primary {
+  background-color: #1e0447;
+  border: 1px solid #383246;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 10px 34px rgba(56, 30, 112, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.btn-primary:hover {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  box-shadow:
+    0 10px 34px rgba(124, 58, 237, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Hero title glow — DESIGN.md section 3, scoped to the Hero <h1> only. */
+.hero-title-glow {
+  text-shadow:
+    0 0 18px rgba(139, 92, 246, 0.55),
+    0 0 46px rgba(124, 58, 237, 0.35);
 }
 
 /* Focus state (keyboard accessibility) — DESIGN.md section 4.1 / 5.
@@ -86,4 +122,78 @@ body {
   box-shadow:
     0 0 0 2px var(--bg-base),
     0 0 0 4px var(--accent);
+}
+
+/* Hero avatar floating animation — DESIGN.md section 7 */
+@keyframes avatar-float {
+  0%,
+  100% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.avatar-float {
+  animation: avatar-float 5s ease-in-out infinite;
+}
+
+/* Background blob drift — DESIGN.md section 7: transform-based, ~±30px on
+   both axes, ~25-30s, ease-in-out, infinite alternate. Each blob gets a
+   slightly different duration/delay so the three don't move in sync. */
+/* Blob 1 is also horizontally centered via `-translate-x-1/2` (see
+   BackgroundBlobs.tsx) — that offset is folded into these keyframes so the
+   drift animation doesn't clobber the centering transform. */
+@keyframes blob-drift-1 {
+  from {
+    transform: translate(calc(-50% - 30px), -20px);
+  }
+  to {
+    transform: translate(calc(-50% + 30px), 20px);
+  }
+}
+
+@keyframes blob-drift-2 {
+  from {
+    transform: translate(25px, -30px);
+  }
+  to {
+    transform: translate(-25px, 30px);
+  }
+}
+
+@keyframes blob-drift-3 {
+  from {
+    transform: translate(-20px, 30px);
+  }
+  to {
+    transform: translate(30px, -25px);
+  }
+}
+
+.blob-drift-1 {
+  animation: blob-drift-1 26s ease-in-out infinite alternate;
+}
+
+.blob-drift-2 {
+  animation: blob-drift-2 30s ease-in-out infinite alternate;
+  animation-delay: -6s;
+}
+
+.blob-drift-3 {
+  animation: blob-drift-3 28s ease-in-out infinite alternate;
+  animation-delay: -12s;
+}
+
+/* Reduced motion — DESIGN.md section 7: every animation in this project
+   (avatar floating, blob drift, scroll transitions) must respect this OS
+   preference by disabling rather than ignoring it. */
+@media (prefers-reduced-motion: reduce) {
+  .avatar-float,
+  .blob-drift-1,
+  .blob-drift-2,
+  .blob-drift-3 {
+    animation: none;
+  }
 }
