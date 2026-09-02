@@ -34,6 +34,10 @@ export const dictionary = {
   },
 
   // Skills — CONTENT.md section 4 (category labels only; item names are proper nouns, not translated)
+  "skills.intro": {
+    es: "He trabajado con lenguajes y tecnologías como Python, Java y JavaScript, y sigo ampliando mi stack constantemente.",
+    en: "I've worked with languages and technologies like Python, Java, and JavaScript, and I keep expanding my stack constantly.",
+  },
   "skills.languages": { es: "Lenguajes", en: "Languages" },
   "skills.frontend": { es: "Frontend", en: "Frontend" },
   "skills.backend": { es: "Backend", en: "Backend" },
