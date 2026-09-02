@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import type { DictionaryKey } from "@/lib/i18n/dictionary";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import { MobileMenu } from "./MobileMenu";
@@ -21,23 +20,10 @@ const NAV_LINKS: NavLink[] = [
 
 export function Navbar() {
   const { t } = useTranslation();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    function handleScroll() {
-      setScrolled(window.scrollY > 8);
-    }
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <header className="fixed inset-x-0 top-6 z-10 flex justify-center px-4">
-      <nav
-        data-scrolled={scrolled}
-        className="navbar-glass grid w-full grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full px-2 py-1.5 md:flex md:w-fit md:gap-2 md:px-3 md:py-1.5"
-      >
+      <nav className="navbar-glass grid w-full grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full px-2 py-1.5 md:flex md:w-fit md:gap-2 md:px-3 md:py-1.5">
         <MobileMenu links={NAV_LINKS} />
 
         <ul className="col-start-2 hidden items-center justify-center gap-1 md:flex">
