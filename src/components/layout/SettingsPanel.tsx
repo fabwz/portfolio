@@ -7,7 +7,7 @@ import { useTranslation } from "@/lib/i18n/useTranslation";
 import { ToggleSwitch } from "@/components/ui/ToggleSwitch";
 import type { Language } from "@/types";
 
-function GearIcon() {
+function GearIcon({ open }: { open: boolean }) {
   return (
     <svg
       aria-hidden="true"
@@ -17,7 +17,9 @@ function GearIcon() {
       strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-4 w-4"
+      className={`h-4 w-4 transition-transform duration-200 ease-out motion-reduce:transition-none ${
+        open ? "rotate-[135deg]" : "rotate-0"
+      }`}
     >
       <circle cx="12" cy="12" r="3" />
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" />
@@ -110,25 +112,27 @@ export function SettingsPanel() {
         aria-expanded={open}
         className="focus-ring border-border-glass text-text-primary hover:text-accent flex h-8 w-8 items-center justify-center rounded-full border transition-colors"
       >
-        <GearIcon />
+        <GearIcon open={open} />
       </button>
 
-      {open && (
-        <div className="navbar-glass absolute top-full right-0 mt-3 flex w-fit flex-col gap-2 rounded-2xl p-2.5">
-          <ToggleSwitch
-            checked={isDark}
-            onChange={toggleTheme}
-            ariaLabel={t("a11y.theme_toggle")}
-            thumbContent={isDark ? <MoonIcon /> : <SunIcon />}
-          />
-          <ToggleSwitch
-            checked={language === "en"}
-            onChange={toggleLanguage}
-            ariaLabel={t("a11y.language_toggle")}
-            thumbContent={language.toUpperCase()}
-          />
-        </div>
-      )}
+      <div
+        data-open={open}
+        aria-hidden={!open}
+        className="settings-panel navbar-glass absolute top-full right-0 mt-3 flex w-fit origin-top-right flex-col gap-2 rounded-2xl p-2.5"
+      >
+        <ToggleSwitch
+          checked={isDark}
+          onChange={toggleTheme}
+          ariaLabel={t("a11y.theme_toggle")}
+          thumbContent={isDark ? <MoonIcon /> : <SunIcon />}
+        />
+        <ToggleSwitch
+          checked={language === "en"}
+          onChange={toggleLanguage}
+          ariaLabel={t("a11y.language_toggle")}
+          thumbContent={language.toUpperCase()}
+        />
+      </div>
     </div>
   );
 }

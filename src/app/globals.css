@@ -239,6 +239,33 @@ body {
   transform: translateY(0);
 }
 
+/* Settings panel entrance — DESIGN.md section "Settings panel (gear icon)":
+   scale 0.95->1 + opacity 0->1, ~200ms ease-out on open, reversed on close.
+   Stays mounted (rather than conditionally rendered) so the close transition
+   can play; visibility flips at the end/start of the transition so the panel
+   is non-interactive and untabbable while closed. */
+.settings-panel {
+  opacity: 0;
+  transform: scale(0.95);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 200ms ease-out,
+    transform 200ms ease-out,
+    visibility 0ms linear 200ms;
+}
+
+.settings-panel[data-open="true"] {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 200ms ease-out,
+    transform 200ms ease-out,
+    visibility 0ms linear 0ms;
+}
+
 /* Reduced motion — DESIGN.md section 7: every animation in this project
    (avatar floating, blob drift, scroll transitions) must respect this OS
    preference by disabling rather than ignoring it. */
@@ -251,7 +278,9 @@ body {
   }
 
   .scroll-reveal,
-  .stagger-child {
+  .stagger-child,
+  .settings-panel,
+  .settings-panel[data-open="true"] {
     transition-duration: 1ms;
     transition-delay: 0ms;
   }
