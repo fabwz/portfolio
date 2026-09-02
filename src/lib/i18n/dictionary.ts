@@ -14,8 +14,8 @@ export const dictionary = {
   // Hero — CONTENT.md section 2
   "hero.title": { es: "Soy Fabián Zamora", en: "I'm Fabián Zamora" },
   "hero.tagline": {
-    es: "Estudiante de Ingeniería del Software apasionado por el desarrollo web y la arquitectura de software",
-    en: "Software Engineering student passionate about web development and software architecture",
+    es: "Estudiante de Ingeniería del Software apasionado por el desarrollo web y la arquitectura de software.",
+    en: "Software Engineering student passionate about web development and software architecture.",
   },
   "hero.cta": { es: "Contáctame", en: "Contact me" },
 
