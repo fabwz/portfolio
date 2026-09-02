@@ -1,10 +1,29 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 
 export function Hero() {
   const { t } = useTranslation();
+  const ctaRef = useRef<HTMLAnchorElement>(null);
+
+  function updateFillPosition(event: React.MouseEvent<HTMLAnchorElement>) {
+    const btn = ctaRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty("--btn-x", `${event.clientX - rect.left}px`);
+    btn.style.setProperty("--btn-y", `${event.clientY - rect.top}px`);
+  }
+
+  function handleFillEnter(event: React.MouseEvent<HTMLAnchorElement>) {
+    const btn = ctaRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const diagonal = Math.hypot(rect.width, rect.height);
+    btn.style.setProperty("--btn-spread", `${diagonal * 2}px`);
+    updateFillPosition(event);
+  }
 
   return (
     <div className="relative z-[5] mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-4 pt-40 pb-24 md:flex-row md:justify-start md:gap-8 md:px-8 md:pt-48">
@@ -16,8 +35,11 @@ export function Hero() {
           {t("hero.tagline")}
         </p>
         <a
+          ref={ctaRef}
           href="#contact"
-          className="btn-primary focus-ring mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium text-white"
+          onMouseEnter={handleFillEnter}
+          onMouseMove={updateFillPosition}
+          className="navbar-glass btn-primary focus-ring mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium"
         >
           {t("hero.cta")}
         </a>
