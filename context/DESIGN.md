@@ -174,6 +174,20 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 - **Baseline:** the page background must still read as predominantly near-black (`--bg-base`) — the blobs are moody, low-key glow, not a bright saturated tint. If in doubt, the blob effect is too strong or too bright.
 - **Stacking order (important):** the blob layer must have a low/no explicit `z-index` (e.g. `z-index: 0` or unset) and sit first in the DOM, so it always renders **behind** the navbar (`z-index: 10`) and page content (`z-index: 5`) — in both themes. If blobs appear to render in front of content in either theme, this is a bug, not a style choice.
 
+### Badge
+- Shape: `rounded-full`, small pill — smaller footprint than a button.
+- Style: minimal glass tint — `--glass-fill` + `--border-glass`, no accent color, no icon or status-dot decoration (per the Claude Design exploration: the plain minimal-glass option was approved, the accent-tinted "active state" dot variant was explicitly rejected as feeling generic/templated).
+- Text: Geist, small size (~12-13px), medium weight.
+- No hover/interactive state — it's a static label, not clickable.
+- Usage: reserved for potential future use (e.g. Skills section) — **not used for the Projects stack tags**, see "Tech stack icons" below instead, which replaced the original badge-based approach after review.
+
+### Tech stack icons (Projects)
+- Technology stack tags on project cards are **not** pill/badge shaped — they're a plain inline row of brand icon + text label, no background/border/fill at all. This was a deliberate simplification after the badge-pill approach felt too generic/templated.
+- Icons: official brand marks via the `react-icons` package (Simple Icons subset, e.g. `react-icons/si`) — justified dependency for accurate, recognizable logos (JavaScript, Tailwind CSS, Vite, GitHub). Don't hand-draw brand logos.
+- Color: **monochrome**, matching secondary text color/opacity for the current theme (not the `--accent` purple) — purple is reserved exclusively for interactive elements (hover, focus, active states) elsewhere in the design system; these icons are static labels, not interactive, so they shouldn't borrow the "interactive" color signal.
+- If a technology has no official brand mark (e.g. a generic web API rather than a product), omit it from the stack list entirely rather than using a generic/unrelated icon or leaving it text-only inconsistent with the rest.
+- The "View on GitHub" link (Secondary button style) also uses the GitHub mark from the same icon set, for visual consistency.
+
 ### Settings panel (gear icon)
 - Same glass treatment as the navbar.
 - Contains two Toggle Switches (see below): one for theme (dark/light), one for language (ES/EN).
