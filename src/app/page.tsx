@@ -1,3 +1,4 @@
+import { About } from "@/components/sections/About";
 import { Hero } from "@/components/sections/Hero";
 
 export default function Home() {
@@ -5,6 +6,9 @@ export default function Home() {
     <main>
       <section id="hero">
         <Hero />
+      </section>
+      <section id="about">
+        <About />
       </section>
     </main>
   );
