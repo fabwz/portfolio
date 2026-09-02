@@ -75,9 +75,9 @@ Note: technology names are proper nouns and are not translated. Only the "(learn
 | `project.wc26.title` | WC26 Analytics | WC26 Analytics |
 | `project.wc26.description` | Aplicación web (SPA) construida en JavaScript vanilla que consume la API pública del Mundial 2026 para generar 5 vistas de analítica: itinerario de un equipo, partidos con mayor diferencia de gol, mejores defensas, asistencia por estadio y matriz de empates por grupo. | A vanilla JavaScript single-page application that consumes the FIFA World Cup 2026 public API to generate 5 analytics views: a team's match itinerary, biggest-margin wins, top defenses, stadium attendance, and a group-stage draws matrix. |
 | `project.wc26.highlight` | El reto técnico principal fue el manejo robusto de errores de red: sesiones expiradas, límite de peticiones con reintento automático y caché offline con localStorage — todo implementado sin frameworks ni librerías externas, solo JavaScript ES6+ y fetch nativo. | The main technical challenge was robust error handling: expired sessions, rate limiting with automatic backoff, and offline caching with localStorage — all implemented without frameworks or external libraries, using only vanilla ES6+ JavaScript and native fetch. |
-| `project.wc26.cta` | Ver repositorio | View repository |
+| `project.wc26.cta` | Ver en GitHub | View on GitHub |
 
-- **Stack tags:** JavaScript (Vanilla), Tailwind CSS, Vite, Fetch API
+- **Stack tags:** JavaScript (Vanilla), Tailwind CSS, Vite
 - **Repo:** https://github.com/fabwz/wc26-client-isw521
 - **Live demo:** none (local only)
 - **Media:** screenshots pending + short GIF/clip recommended per earlier discussion (not yet produced)
