@@ -60,12 +60,13 @@ body {
 }
 
 /* Navbar glass — DESIGN.md section 5 "Navbar": exaggerated glass params,
-   stronger than the generic section 4 baseline. Fixed rgba(white) values,
-   same in both themes (same principle as the primary button not inverting
-   with theme) — also shared by SettingsPanel and MobileMenu dropdowns. */
+   stronger than the generic section 4 baseline. Tinted with each theme's
+   own --bg-base (not white) at 0.75 opacity — a white tint doesn't obscure
+   light-colored text behind it in dark mode, which caused a real
+   legibility bug. Also shared by SettingsPanel and MobileMenu dropdowns. */
 .navbar-glass {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(10, 10, 15, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(36px) saturate(200%);
   -webkit-backdrop-filter: blur(36px) saturate(200%);
   box-shadow:
@@ -75,10 +76,13 @@ body {
   transition: background-color 300ms ease;
 }
 
-/* Scroll behavior — DESIGN.md section 5: opacity increases on scroll to
-   improve readability over content passing behind it. */
-.navbar-glass[data-scrolled="true"] {
-  background: rgba(255, 255, 255, 0.22);
+.light .navbar-glass {
+  background: rgba(250, 250, 250, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
 }
 
 /* Primary button — DESIGN.md section 5 "Buttons/Primary". Values are fixed
