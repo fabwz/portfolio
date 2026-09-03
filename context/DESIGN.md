@@ -46,7 +46,11 @@ Reference document for visual identity and the design system. Serves as the sing
 | `--border-glass` | Borders of glass elements | `rgba(0,0,0,0.10)` |
 | `--glass-fill` | Base fill of glass surfaces | `rgba(0,0,0,0.05)` |
 
-**Text hierarchy rule:** primary and secondary text share the same base color in each mode by default, with hierarchy achieved through opacity (72%). **Exception:** the Hero tagline specifically uses a dedicated muted hex (`#B4B4C4` in dark mode) instead of the opacity-based approach, per the approved Claude Design reference — this is a deliberate, scoped exception for that one element, not a change to the general rule. Do not extend this hex to other secondary text elsewhere without approval.
+**Text hierarchy rule:** primary and secondary text share the same base color in each mode by default, with hierarchy achieved through opacity. **Exception:** the Hero tagline specifically uses a dedicated muted hex (`#B4B4C4` in dark mode) instead of the opacity-based approach, per the approved Claude Design reference — this is a deliberate, scoped exception for that one element, not a change to the general rule. Do not extend this hex to other secondary text elsewhere without approval.
+
+**The exact opacity value may differ per theme.** The original flat 72% was a theoretical estimate that passed contrast math on paper but failed real rendered contrast in light mode (measured 3.1–4.0:1 against text on `--bg-base`, below the 4.5:1 AA requirement for normal text — a real accessibility bug, not a style choice). Dark mode's 72% is confirmed fine (6.2–9.5:1 rendered). Light mode's opacity must be raised to whatever value achieves ≥4.5:1 measured against **actual rendered pixels** (not just the theoretical flattened value) — verify empirically. Do not introduce intermediate grays to solve this — adjust opacity, not hue.
+
+**Stacked-opacity trap:** never layer opacity-based secondary text on top of another translucent surface (e.g. a Badge's glass fill) without checking the *combined* rendered contrast — each translucent layer compounds contrast loss. This caused the worst measured failure in the project (the Skills "(en aprendizaje)" tag: 2.22:1 dark / 1.49:1 light, both far below AA). Elements like this need a contrast-checked, non-stacked treatment of their own rather than inheriting the general secondary-text opacity on top of an already-translucent parent.
 
 **Accent consistency rule:** `--accent` (`#8B5CF6`) is identical in both modes — it's the personal brand color and must not vary when switching themes.
 

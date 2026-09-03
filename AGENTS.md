@@ -144,6 +144,7 @@ Single page (`src/app/page.tsx`) rendering all 5 sections in order: Hero → Abo
 - Icon-only buttons (gear icon, hamburger menu) require an `aria-label` — values are in `CONTENT.md` section 7.
 - `document.documentElement.lang` must update dynamically (`es-CR` / `en`) when the language changes.
 - Use semantic HTML (`<nav>`, `<button>`, `<section>`, etc.) — don't reach for generic `<div>`s with click handlers where a native interactive element applies.
+- **Focus management on dismissible overlays:** any popover/menu/panel (SettingsPanel, MobileMenu) must return keyboard focus explicitly to its trigger element when dismissed — via Escape, outside click, or a close button. This is not optional: a real bug was found where closing SettingsPanel via Escape left focus on `<body>`, causing forward Tab navigation to permanently skip the entire navbar for the rest of the session (a genuine WCAG 2.4.3 Focus Order failure). Verify this explicitly for every dismissible overlay in the project, not just the one where it was caught.
 
 No broader WCAG audit is in scope — this is the confirmed baseline, not a starting point to expand from without asking first.
 
