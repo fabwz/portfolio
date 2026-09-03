@@ -128,8 +128,15 @@ body {
 
 /* Secondary button — DESIGN.md section 5 "Buttons/Secondary". No fill at
    rest, only the glass border; hover intensifies border + adds a light
-   glass fill (short of the primary button's solid fill). */
+   glass fill (short of the primary button's solid fill) + a subtle
+   cursor-tracked glow. The glow reuses the Primary button's --btn-x/--btn-y
+   tracking mechanism (updated on mousemove via useCursorTracking) but is
+   capped at a small fixed radius and low opacity via ::before, so it never
+   approaches the Primary button's full liquid fill. */
 .btn-secondary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   border: 1px solid var(--border-glass);
   background: transparent;
   transition:
@@ -137,9 +144,30 @@ body {
     border-color 220ms ease;
 }
 
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  top: var(--btn-y, 50%);
+  left: var(--btn-x, 50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--accent);
+  filter: blur(24px);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 220ms ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
 .btn-secondary:hover {
   border-color: var(--accent);
   background: var(--glass-fill);
+}
+
+.btn-secondary:hover::before {
+  opacity: 0.16;
 }
 
 /* Navbar links — DESIGN.md section 5 "Navbar" active-section indicator &
