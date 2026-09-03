@@ -228,6 +228,7 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
   - No intermediate radii.
 - **Spacing:** Tailwind's default scale (4px base), no customization.
 - **Content container:** `max-w-6xl` centered, with responsive side padding (`px-4` mobile → `px-8` desktop, fine-tune during implementation).
+- **Vertical section rhythm:** every section — including Hero, not just the ones below it — uses the same top/bottom padding (`py-16`, 64px), producing a consistent ~128px gap between any two adjacent sections. Confirmed via audit that About/Projects/Skills/Contact already matched this exactly; Hero was the one exception (used a larger custom padding) and must be brought in line with the same `py-16` rhythm, not treated as a special case.
 
 ---
 
@@ -252,6 +253,7 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 - **Navbar:** collapses into a hamburger menu within the glass pill (see section 5).
 - **Blurred blobs:** reduced in size/quantity on mobile, prioritizing performance on lower-end devices.
 - **Hero avatar:** reduces in size and moves to be centered above the text (instead of beside it) on narrow layouts.
+- **Hero title:** must remain a single line at every breakpoint, including tablet (768px) — a real bug found the title wrapping to two lines specifically at 768px (fine at both mobile and desktop) because a font-size breakpoint jump coincided with the avatar appearing beside the text and competing for horizontal space at that same width. Coordinate the title's font-size stepping with the avatar's appearance breakpoint so they don't both change at once — verify no wrap at 768px specifically, not just at the extremes.
 
 ---
 

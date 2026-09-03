@@ -26,9 +26,9 @@ export function Hero() {
   }
 
   return (
-    <div className="relative z-[5] mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-4 pt-40 pb-24 md:flex-row md:justify-start md:gap-8 md:px-8 md:pt-48">
+    <div className="relative z-[5] mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-4 py-16 md:flex-row md:justify-start md:gap-8 md:px-8">
       <div className="flex flex-col items-center text-center md:items-start md:text-left">
-        <h1 className="font-serif text-text-primary hero-title-glow max-w-xl text-4xl italic sm:text-5xl md:text-6xl">
+        <h1 className="font-serif text-text-primary hero-title-glow max-w-xl text-4xl italic sm:text-5xl lg:text-6xl">
           {t("hero.title")}
         </h1>
         <p className="text-text-secondary dark:text-[#B4B4C4] mt-6 max-w-md text-base sm:text-lg">
@@ -45,7 +45,7 @@ export function Hero() {
         </a>
       </div>
 
-      <div className="avatar-float relative h-64 w-64 shrink-0 overflow-hidden rounded-full sm:h-80 sm:w-80 md:ml-auto md:mr-8 md:h-96 md:w-96 lg:mr-16">
+      <div className="avatar-float relative h-64 w-64 shrink-0 overflow-hidden rounded-full sm:h-80 sm:w-80 md:ml-auto md:mr-8 md:h-48 md:w-48 lg:mr-16 lg:h-96 lg:w-96">
         <Image
           src="/images/avatar/hero-avatar.png"
           alt=""
