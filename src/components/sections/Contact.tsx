@@ -3,6 +3,7 @@
 import { FaLinkedin } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { SiGithub } from "react-icons/si";
+import { useCursorTracking } from "@/hooks/useCursorTracking";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 
@@ -13,6 +14,12 @@ const GITHUB_URL = "https://github.com/fabwz";
 export function Contact() {
   const { t } = useTranslation();
   const { ref, isRevealed } = useScrollReveal<HTMLDivElement>();
+  const { ref: emailBtnRef, updateCursorPosition: updateEmailCursor } =
+    useCursorTracking<HTMLAnchorElement>();
+  const { ref: linkedinBtnRef, updateCursorPosition: updateLinkedinCursor } =
+    useCursorTracking<HTMLAnchorElement>();
+  const { ref: githubBtnRef, updateCursorPosition: updateGithubCursor } =
+    useCursorTracking<HTMLAnchorElement>();
 
   return (
     <div
@@ -29,7 +36,9 @@ export function Contact() {
 
       <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
         <a
+          ref={emailBtnRef}
           href={`mailto:${EMAIL}`}
+          onMouseMove={updateEmailCursor}
           className="btn-secondary focus-ring text-text-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium"
         >
           <FiMail className="h-4 w-4" aria-hidden="true" />
@@ -37,9 +46,11 @@ export function Contact() {
         </a>
 
         <a
+          ref={linkedinBtnRef}
           href={LINKEDIN_URL}
           target="_blank"
           rel="noopener noreferrer"
+          onMouseMove={updateLinkedinCursor}
           className="btn-secondary focus-ring text-text-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium"
         >
           <FaLinkedin className="h-4 w-4" aria-hidden="true" />
@@ -47,9 +58,11 @@ export function Contact() {
         </a>
 
         <a
+          ref={githubBtnRef}
           href={GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
+          onMouseMove={updateGithubCursor}
           className="btn-secondary focus-ring text-text-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium"
         >
           <SiGithub className="h-4 w-4" aria-hidden="true" />

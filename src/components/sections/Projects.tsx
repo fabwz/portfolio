@@ -5,6 +5,7 @@ import type { IconType } from "react-icons";
 import { SiGithub, SiJavascript, SiTailwindcss, SiVite } from "react-icons/si";
 import { Card } from "@/components/ui/Card";
 import { projects } from "@/data/projects";
+import { useCursorTracking } from "@/hooks/useCursorTracking";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 
@@ -19,6 +20,7 @@ const STACK_ICONS: Record<string, IconType> = {
 export function Projects() {
   const { t } = useTranslation();
   const { ref, isRevealed } = useScrollReveal<HTMLDivElement>();
+  const { ref: repoBtnRef, updateCursorPosition } = useCursorTracking<HTMLAnchorElement>();
   const project = projects[0];
 
   return (
@@ -73,9 +75,11 @@ export function Projects() {
         </div>
 
         <a
+          ref={repoBtnRef}
           href={project.repoUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onMouseMove={updateCursorPosition}
           className="btn-secondary focus-ring text-text-primary mt-6 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium"
         >
           <SiGithub className="h-4 w-4" aria-hidden="true" />
