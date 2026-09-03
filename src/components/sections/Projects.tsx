@@ -41,7 +41,10 @@ export function Projects() {
           loop
           muted
           playsInline
-          className="w-full rounded-xl"
+          // Reserves the video's real 1920x866 aspect ratio before
+          // loadedmetadata fires, so the card doesn't jump height once
+          // the video loads.
+          className="aspect-[1920/866] w-full rounded-xl object-cover"
         />
 
         <h3 className="text-text-primary mt-6 text-xl font-medium sm:text-2xl">
