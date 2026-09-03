@@ -29,7 +29,7 @@ export function Projects() {
       data-revealed={isRevealed}
       className="scroll-reveal relative z-[5] mx-auto max-w-6xl px-4 py-16 md:px-8"
     >
-      <h2 className="text-text-primary mx-auto max-w-2xl font-serif text-3xl italic sm:text-4xl">
+      <h2 className="text-text-primary mx-auto max-w-2xl text-center font-serif text-3xl italic sm:text-4xl">
         {t("nav.projects")}
       </h2>
 

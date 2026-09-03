@@ -27,7 +27,7 @@ export function Contact() {
       data-revealed={isRevealed}
       className="scroll-reveal relative z-[5] mx-auto max-w-6xl px-4 py-16 text-center md:px-8"
     >
-      <h2 className="text-text-primary mx-auto max-w-2xl font-serif text-3xl italic sm:text-4xl">
+      <h2 className="text-text-primary mx-auto max-w-2xl text-center font-serif text-3xl italic sm:text-4xl">
         {t("contact.title")}
       </h2>
       <p className="text-text-secondary mx-auto mt-4 max-w-2xl text-base sm:text-lg">

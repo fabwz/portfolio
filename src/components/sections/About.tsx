@@ -14,10 +14,10 @@ export function About() {
       data-revealed={isRevealed}
       className="scroll-reveal relative z-[5] mx-auto max-w-6xl px-4 py-16 md:px-8"
     >
-      <h2 className="font-serif text-text-primary mx-auto max-w-2xl text-3xl italic sm:text-4xl">
+      <h2 className="font-serif text-text-primary mx-auto max-w-2xl text-center text-3xl italic sm:text-4xl">
         {t("nav.about")}
       </h2>
-      <div className="text-text-secondary mx-auto mt-8 flex max-w-2xl flex-col gap-4">
+      <div className="text-text-secondary mx-auto mt-8 flex max-w-xl flex-col gap-4">
         {(
           ["about.paragraph1", "about.paragraph2", "about.paragraph3"] as const
         ).map((key, index) => (
