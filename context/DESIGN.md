@@ -148,7 +148,7 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
 
 **Secondary** (e.g. internal links, "View project")
 - Base state: no fill, only `--border-glass` border.
-- Hover: border intensifies + a very light glass fill appears (without reaching the solid fill of the primary button).
+- Hover: border intensifies + a very light glass fill appears (without reaching the solid fill of the primary button) + a subtle cursor-tracked glow — a soft, low-opacity `--accent` radial highlight that follows the cursor within the button's bounds while hovering (same `--btn-x`/`--btn-y` tracking mechanism as the Primary button's liquid fill, but capped at low opacity/small radius — never approaching a full fill). This ties Secondary buttons into the same interactive language as the Primary CTA without competing with it for visual weight — Secondary must stay clearly more restrained at every step.
 - Shape: `rounded-full`.
 
 ### Cards (projects, etc.)
