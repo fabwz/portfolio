@@ -73,16 +73,31 @@ export function SettingsPanel() {
     () => false,
   );
   const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
     function handlePointerDown(event: PointerEvent) {
       if (!panelRef.current?.contains(event.target as Node)) {
         setOpen(false);
+        const target = event.target as HTMLElement;
+        const clickedFocusable = target.closest(
+          'a[href], button, input, select, textarea, [tabindex]',
+        );
+        if (!clickedFocusable) {
+          // Prevent the browser's default focus-follows-click behavior
+          // (which would otherwise move focus to <body> after this
+          // handler runs) so our explicit focus restoration sticks.
+          event.preventDefault();
+          triggerRef.current?.focus();
+        }
       }
     }
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     }
     document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
@@ -106,6 +121,7 @@ export function SettingsPanel() {
   return (
     <div ref={panelRef} className="relative">
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-label={t("a11y.theme_toggle")}
