@@ -62,7 +62,7 @@ export function Skills() {
                   <Badge key={item}>
                     {item}
                     {item === category.learningItem && (
-                      <span className="text-text-secondary ml-1 text-[11px] italic">
+                      <span className="text-text-primary/85 ml-1 text-[11px] italic">
                         ({t("skills.learning_tag")})
                       </span>
                     )}
