@@ -39,6 +39,8 @@ Any new visual value or piece of text needed during implementation that isn't in
 - **Analytics/tracking:** none — do not add any (Vercel Analytics, Google Analytics, etc.)
 - **Deployment target:** not yet decided — do not assume a platform or add platform-specific config
 
+**Known gotcha — Tailwind v4 `translate` vs `transform`:** in Tailwind v4, translate utilities (`translate-x-*`, `-translate-y-*`, etc.) compile to the standalone CSS `translate` property, not `transform` like in earlier Tailwind versions. Any `transition-[...]` list that includes `transform` but not `translate` will silently fail to animate translate-based hover/state changes — this caused a real bug (Card's hover lift snapping instantly while its border-color faded smoothly). When adding a transition that includes any translate utility, make sure `translate` (not `transform`) is in the transition property list.
+
 ---
 
 ## 4. Architecture
