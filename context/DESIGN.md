@@ -228,7 +228,7 @@ box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
   - No intermediate radii.
 - **Spacing:** Tailwind's default scale (4px base), no customization.
 - **Content container:** `max-w-6xl` centered, with responsive side padding (`px-4` mobile → `px-8` desktop, fine-tune during implementation).
-- **Vertical section rhythm:** every section — including Hero, not just the ones below it — uses the same top/bottom padding (`py-16`, 64px), producing a consistent ~128px gap between any two adjacent sections. Confirmed via audit that About/Projects/Skills/Contact already matched this exactly; Hero was the one exception (used a larger custom padding) and must be brought in line with the same `py-16` rhythm, not treated as a special case.
+- **Vertical section rhythm:** the *bottom* padding of every section (including Hero) and the *top* padding of every section **except Hero** use the same value (`py-16`-equivalent, 64px), producing a consistent ~128px gap between any two adjacent sections. **Hero's top padding is a deliberate exception** — it's the only section whose top edge coincides with the actual top of the page (scroll position 0), so it alone needs extra clearance to avoid visually colliding with the fixed floating navbar on initial load. Hero's top and bottom padding are independent values, not a matched pair: bottom follows the site-wide rhythm (`pb-16`, for the Hero→About gap), top is sized specifically to clear the navbar (larger, e.g. `pt-40`/`md:pt-48` or whatever value gives comfortable clearance below the fixed pill) and has nothing to do with the inter-section rhythm. Do not equalize Hero's top and bottom padding again — that was tried and caused a real regression (navbar overlapping the Hero title/avatar).
 
 ---
 

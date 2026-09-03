@@ -26,7 +26,7 @@ export function Hero() {
   }
 
   return (
-    <div className="relative z-[5] mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-4 py-16 md:flex-row md:justify-start md:gap-8 md:px-8">
+    <div className="relative z-[5] mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-4 pt-40 pb-16 md:flex-row md:justify-start md:gap-8 md:px-8 md:pt-48">
       <div className="flex flex-col items-center text-center md:items-start md:text-left">
         <h1 className="font-serif text-text-primary hero-title-glow max-w-xl text-4xl italic sm:text-5xl lg:text-6xl">
           {t("hero.title")}
